@@ -5,7 +5,6 @@ import styles from '../styles/Home.module.css'
 import mercadopago from 'mercadopago';
 
 const Home: NextPage = ({ data }: any) => {
-  console.log(data);
   return (
     <div className={styles.container}>
       <Head>
@@ -32,9 +31,9 @@ const Home: NextPage = ({ data }: any) => {
           <span>DATE: 11/25</span>
           <span>CPF: 12345678909</span>
 
-          <button onClick={() => window.open(`${data.init_point}`)}>
+          {/* <button onClick={() => window.open(`${data.init_point}`)}>
             COMPRAR CARAI
-          </button>
+          </button> */}
         </div>
 
         <p className={styles.description}>
@@ -87,70 +86,63 @@ const Home: NextPage = ({ data }: any) => {
       </footer>
     </div>
   );
-}
+};
 
 export async function getServerSideProps(ctx: GetServerSidePropsContext) {
-
   mercadopago.configure({
     access_token: `${process.env.NEXT_PUBLIC_KEY}`,
   });
 
-const response = await mercadopago.preferences
-  .create({
-    items: [
-      {
-        title: "Meu produto",
-        unit_price: 10.9,
-        quantity: 1,
-      },
-    ],
-    payment_methods: {
-      excluded_payment_types: [
+  const response = await mercadopago.preferences
+    .create({
+      items: [
         {
-          id: "ticket",
-        },
-        {
-          id: "credit_card",
-        },
-        {
-          id: "debit_card",
-        },
-        {
-          id: "paypal",
+          title: "Meu produto",
+          unit_price: 10.9,
+          quantity: 1,
         },
       ],
-    },
-    back_urls: {
-      success: "http://localhost:3000/payments/success",
-      pending: "http://localhost:3000/payments/pending",
-      failure: "http://localhost:3000/payments/failure",
-    },
-    auto_return: "approved",
-    payer: {
-      name: "Mercadopago",
-      email: "mercadopago@example.com",
-      phone: {
-        area_code: "+55",
-        number: "993109148",
+      payment_methods: {
+        excluded_payment_types: [
+          {
+            id: "ticket",
+          },
+          {
+            id: "credit_card",
+          },
+          {
+            id: "debit_card",
+          },
+          {
+            id: "paypal",
+          },
+        ],
       },
-      identification: {
-        type: "carai",
-        number: "400",
+      back_urls: {
+        success: "http://localhost:3000/payments/success",
+        pending: "http://localhost:3000/payments/pending",
+        failure: "http://localhost:3000/payments/failure",
       },
-    },
-  })
-  .then(function (response) {
-    return response.body;
-  })
-  .catch(function (error) {
-    console.log(error);
-  });
+      auto_return: "approved",
+      payer: {
+        name: "Mercadopago",
+        email: "mercadopago@example.com",
+      },
+    })
+    .then(function (response) {
+      return response.body;
+    })
+    .catch(function (error) {
+      console.log(error);
+    });
+
+  console.log(response);
 
   return {
     props: {
       data: response,
-    }, 
-  }
+    },
+  };
 }
 
 export default Home
