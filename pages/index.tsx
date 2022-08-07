@@ -92,7 +92,7 @@ const Home: NextPage = ({ data }: any) => {
 export async function getServerSideProps(ctx: GetServerSidePropsContext) {
 
   mercadopago.configure({
-    access_token: 'TEST-8279748609370148-080512-778f53cd3000d35970e7fd3e223a1ba6-294413052'
+    access_token: `${process.env.NEXT_PUBLIC_KEY}`,
   });
 
 const response = await mercadopago.preferences
@@ -115,6 +115,9 @@ const response = await mercadopago.preferences
         },
         {
           id: "debit_card",
+        },
+        {
+          id: "paypal",
         },
       ],
     },
