@@ -31,9 +31,9 @@ const Home: NextPage = ({ data }: any) => {
           <span>DATE: 11/25</span>
           <span>CPF: 12345678909</span>
 
-          {/* <button onClick={() => window.open(`${data.init_point}`)}>
+          <button onClick={() => window.open(`${data.init_point}`)}>
             COMPRAR CARAI
-          </button> */}
+          </button>
         </div>
 
         <p className={styles.description}>
