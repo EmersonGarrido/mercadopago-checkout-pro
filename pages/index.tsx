@@ -19,8 +19,26 @@ const Home: NextPage = ({ data }: any) => {
           Welcome to <a href="https://nextjs.org">Next.js!</a>
         </h1>
 
+        <div
+          style={{
+            display: "flex",
+            flexDirection: "column",
+            gap: "20px",
+          }}
+        >
+          <span>Nome: APROV</span>
+          <span>Cartao Teste: 4235 6477 2802 5682</span>
+          <span>CVV: 123</span>
+          <span>DATE: 11/25</span>
+          <span>CPF: 12345678909</span>
+
+          <button onClick={() => window.open(`${data.init_point}`)}>
+            COMPRAR CARAI
+          </button>
+        </div>
+
         <p className={styles.description}>
-          Get started by editing{' '}
+          Get started by editing{" "}
           <code className={styles.code}>pages/index.tsx</code>
         </p>
 
@@ -61,14 +79,14 @@ const Home: NextPage = ({ data }: any) => {
           target="_blank"
           rel="noopener noreferrer"
         >
-          Powered by{' '}
+          Powered by{" "}
           <span className={styles.logo}>
             <Image src="/vercel.svg" alt="Vercel Logo" width={72} height={16} />
           </span>
         </a>
       </footer>
     </div>
-  )
+  );
 }
 
 export async function getServerSideProps(ctx: GetServerSidePropsContext) {
