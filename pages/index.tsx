@@ -126,6 +126,18 @@ const response = await mercadopago.preferences
       failure: "http://localhost:3000/payments/failure",
     },
     auto_return: "approved",
+    payer: {
+      name: "Mercadopago",
+      email: "mercadopago@example.com",
+      phone: {
+        area_code: "+55",
+        number: "993109148",
+      },
+      identification: {
+        type: "carai",
+        number: "400",
+      },
+    },
   })
   .then(function (response) {
     return response.body;
