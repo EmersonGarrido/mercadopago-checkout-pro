@@ -100,7 +100,7 @@ const response = await mercadopago.preferences
     items: [
       {
         title: "Meu produto",
-        unit_price: 100,
+        unit_price: 10.9,
         quantity: 1,
       },
     ],
