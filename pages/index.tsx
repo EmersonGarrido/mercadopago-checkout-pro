@@ -95,25 +95,41 @@ export async function getServerSideProps(ctx: GetServerSidePropsContext) {
     access_token: 'TEST-8279748609370148-080512-778f53cd3000d35970e7fd3e223a1ba6-294413052'
   });
 
-const response = await mercadopago.preferences.create({
-  items: [
-    {
-      title: 'Meu produto',
-      unit_price: 100,
-      quantity: 1,
-    }
-  ],
-  back_urls:  { 
-    success: 'http://localhost:3000/payments/success',
-    pending: 'http://localhost:3000/payments/pending',
-    failure: 'http://localhost:3000/payments/failure' 
-} 
-})
-.then(function(response){
-  return response.body
-}).catch(function(error){
-  console.log(error);
-});
+const response = await mercadopago.preferences
+  .create({
+    items: [
+      {
+        title: "Meu produto",
+        unit_price: 100,
+        quantity: 1,
+      },
+    ],
+    payment_methods: {
+      // default_payment_method_id: "pix",
+      excluded_payment_types: [
+        {
+          id: "ticket",
+        },
+        {
+          id: "credit_card",
+        },
+        {
+          id: "debit_card",
+        },
+      ],
+    },
+    back_urls: {
+      success: "http://localhost:3000/payments/success",
+      pending: "http://localhost:3000/payments/pending",
+      failure: "http://localhost:3000/payments/failure",
+    },
+  })
+  .then(function (response) {
+    return response.body;
+  })
+  .catch(function (error) {
+    console.log(error);
+  });
 
   return {
     props: {
