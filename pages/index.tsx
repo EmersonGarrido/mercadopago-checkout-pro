@@ -104,6 +104,7 @@ export async function getServerSideProps(ctx: GetServerSidePropsContext) {
         },
       ],
       payment_methods: {
+        default_payment_method_id: "pix",
         excluded_payment_types: [
           {
             id: "ticket",
