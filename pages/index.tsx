@@ -105,7 +105,6 @@ const response = await mercadopago.preferences
       },
     ],
     payment_methods: {
-      // default_payment_method_id: "pix",
       excluded_payment_types: [
         {
           id: "ticket",
@@ -126,6 +125,7 @@ const response = await mercadopago.preferences
       pending: "http://localhost:3000/payments/pending",
       failure: "http://localhost:3000/payments/failure",
     },
+    auto_return: "approved",
   })
   .then(function (response) {
     return response.body;
