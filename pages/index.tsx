@@ -5,6 +5,7 @@ import styles from '../styles/Home.module.css'
 import mercadopago from 'mercadopago';
 
 const Home: NextPage = ({ data }: any) => {
+  console.log(data);
   return (
     <div className={styles.container}>
       <Head>
