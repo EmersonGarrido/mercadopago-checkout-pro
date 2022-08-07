@@ -1,8 +1,8 @@
-import type { GetServerSidePropsContext, NextPage } from 'next'
-import Head from 'next/head'
-import Image from 'next/image'
-import styles from '../styles/Home.module.css'
-import mercadopago from 'mercadopago';
+import type { GetServerSidePropsContext, NextPage } from "next";
+import Head from "next/head";
+import Image from "next/image";
+import styles from "../styles/Home.module.css";
+import mercadopago from "mercadopago";
 
 const Home: NextPage = ({ data }: any) => {
   console.log(data);
@@ -115,6 +115,8 @@ export async function getServerSideProps(ctx: GetServerSidePropsContext) {
           {
             id: "debit_card",
           },
+        ],
+        excluded_payment_methods: [
           {
             id: "paypal",
           },
@@ -147,4 +149,4 @@ export async function getServerSideProps(ctx: GetServerSidePropsContext) {
   };
 }
 
-export default Home
+export default Home;
